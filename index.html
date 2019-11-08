@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+  *{
+    padding: 0;
+    margin: 0;
+  }
+  .box{
+    height: 800px;
+    background-color: aqua;
+  }
+  .box--yellow{
+    background-color:lightgoldenrodyellow;
+  }
+  .box--red{
+    background-color: lightcoral;
+  }
+  .box--blue{
+    background-color: lightblue;
+  }
+
+  /* デフォルト */
+  .effect--title__inner{
+    position: relative;
+  }
+  .effect--title__inner::after{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0%;
+    background-color: black;
+  }
+  .effect--title__inner::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 0%;
+    background-color: black;
+  }
+  .effect--title__text{
+    opacity: 0;
+  }
+
+  /* アクション */
+  .effect--title.on .effect--title__inner::after{
+    animation-name: first;
+    animation-duration: .3s;
+    animation-timing-function: ease-out;
+    animation-delay: .3s;
+  }
+  .effect--title.on .effect--title__inner::before{
+    animation-name: second;
+    animation-duration: .3s;
+    animation-timing-function: ease-in;
+    animation-delay: .6s;
+  }
+  .effect--title.on .effect--title__text{
+    animation-name: text;
+    animation-delay: .6s;
+    animation-fill-mode:forwards;
+  }
+
+
+  @keyframes first {
+    0% {
+        width: 0%;
+    }
+    100% {
+      width: 100%;
+    }
+  }
+  @keyframes second {
+    0% {
+        width: 100%;
+    }
+    50%{
+      width: 100%;
+    }
+    100% {
+      width: 0%;
+    }
+  }
+  @keyframes text {
+    0% {
+        opacity: 1;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  </style>
+</head>
+<body>
+  <main>
+    <div class="box box--yellow">
+      <h2 id="sample" class="effect--title"><span class="effect--title__inner"><span class="effect--title__text op0">エフェクトかけるよ</span></span></h2>
+    </div>
+    <div class="box box--blue">
+      <h2 id="sample" class="effect--title"><span class="effect--title__inner"><span class="effect--title__text op0">エフェクトかけるよ</span></span></h2>
+    </div>
+    <div class="box box--yellow">
+      <h2 id="sample" class="effect--title"><span class="effect--title__inner"><span class="effect--title__text op0">エフェクトかけるよ</span></span></h2>
+    </div>
+  </main>
+  <script
+  src="https://code.jquery.com/jquery-2.2.4.min.js"
+  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+  crossorigin="anonymous"></script>
+  <script src="./lib/jquery.inview.min.js"></script>
+  <script>
+    $('.effect--title').on('inview', function(event, isInView){
+    if (isInView) {
+        $(this).addClass('on');
+    }
+  });
+  </script>
+
+</body>
+</html>
